@@ -39,13 +39,33 @@ function generateImage() {
             const photoX = 819, photoY = 890, photoWidth = 520, photoHeight = 520;
             const radius = photoWidth / 2;
 
+            // Calculate aspect ratio cropping to fill the circular frame
+            let imgRatio = img.width / img.height;
+            let targetRatio = photoWidth / photoHeight;
+            let cropWidth, cropHeight, cropX, cropY;
+
+            if (imgRatio > targetRatio) {
+                // Image is wider than the target area
+                cropHeight = img.height;
+                cropWidth = img.height * targetRatio;
+                cropX = (img.width - cropWidth) / 2;
+                cropY = 0;
+            } else {
+                // Image is taller than the target area
+                cropWidth = img.width;
+                cropHeight = img.width / targetRatio;
+                cropX = 0;
+                cropY = (img.height - cropHeight) / 2;
+            }
+
             ctx.save();
             ctx.beginPath();
             ctx.arc(photoX + radius, photoY + radius, radius, 0, Math.PI * 2);
             ctx.closePath();
             ctx.clip();
 
-            ctx.drawImage(img, photoX, photoY, photoWidth, photoHeight);
+            // Draw cropped image
+            ctx.drawImage(img, cropX, cropY, cropWidth, cropHeight, photoX, photoY, photoWidth, photoHeight);
             ctx.restore();
 
             ctx.fillStyle = "white";
