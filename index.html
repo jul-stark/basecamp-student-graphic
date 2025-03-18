@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Design Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        canvas { display: none; }
+        #preview { max-width: 100%; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <h2>Create Your Custom Design</h2>
+
+    <input type="file" id="imageUpload" accept="image/*"><br><br>
+    <input type="text" id="nameInput" placeholder="Enter your name"><br><br>
+    <button onclick="generateImage()">Generate Image</button><br><br>
+
+    <img id="preview" alt="Generated Image Preview">
+    <a id="downloadLink" style="display: none;" download="custom-design.png">Download Image</a>
+
+    <canvas id="canvas"></canvas>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
